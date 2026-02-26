@@ -1,0 +1,6 @@
+@OptimalVisionAPI_HostAddress = http://localhost:5170
+
+GET {{OptimalVisionAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
