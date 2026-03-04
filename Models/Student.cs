@@ -14,7 +14,7 @@ public class Student
     public string Password { get; set; }
 
     public string Address { get; set; }
-    public DateTime DateOfBirth { get; set; }
+    public string DateOfBirth { get; set; }
 
     [NotMapped]
     public double Age
@@ -22,8 +22,8 @@ public class Student
         get
         {
             var today = DateTime.Today;
-            var age = today.Year - DateOfBirth.Year;
-            if (DateOfBirth.Date > today.AddYears(-age)) age--;
+            var age = today.Year - Convert.ToDateTime( DateOfBirth).Year;
+            if (Convert.ToDateTime(DateOfBirth).Date > today.AddYears(-age)) age--;
             return age;
         }
     }
@@ -63,5 +63,5 @@ public class Student
 
     public string TryYourLuckWithChosenCountryOrNot { get; set; }
 
-    public DateTime DateApplied { get; set; }
+    public string DateApplied { get; set; }
 }

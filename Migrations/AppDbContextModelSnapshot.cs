@@ -130,11 +130,13 @@ namespace OptimalVisionAPI.Migrations
                     b.Property<bool>("CanYouStopAgent")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("DateApplied")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateApplied")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateOfBirth")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()

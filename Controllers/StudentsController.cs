@@ -10,11 +10,11 @@ using OptimalVisionAPI.Models;
 public class StudentsController(AppDbContext context) : ControllerBase
 {
 
-    [HttpGet(Name = "GetSchools")]
+    [HttpGet(Name = "GetStudents")]
     public IActionResult GetStudents()
     {
-        var schools = context.Student.ToList();
-        return Ok(schools);
+        var students = context.Student.ToList();
+        return Ok(students);
     }
 
     [HttpGet("{id}")]
@@ -30,10 +30,10 @@ public class StudentsController(AppDbContext context) : ControllerBase
     }
 
 
-    [HttpGet("{emailAddress}/{password}")]
-    public IActionResult GetStudentByEmailAddressAndPassword(string emailAddress, string password)
+    [HttpGet("{email}/{password}")]
+    public IActionResult GetStudentByEmailAndPassword(string email, string password)
     {
-        var student = context.Student.FirstOrDefault(s => s.Email == emailAddress && s.Password == password);
+        var student = context.Student.FirstOrDefault(s => s.Email == email && s.Password == password);
     
         if (student == null)
         {
@@ -78,16 +78,17 @@ public class StudentsController(AppDbContext context) : ControllerBase
     }
     
     
+    
     [HttpDelete("{id}")]
     public IActionResult DeleteStudent(int id)
     {
-        var school = context.Student.Find(id);
-        if (school == null)
+        var student = context.Student.Find(id);
+        if (student == null)
         {
             return NotFound();
         }
     
-        context.Student.Remove(school);
+        context.Student.Remove(student);
         context.SaveChanges();
         return NoContent();
     }
