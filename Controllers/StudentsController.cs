@@ -1,3 +1,5 @@
+using OptimalVisionAPI.DTOs;
+
 namespace OptimalVisionAPI.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +44,23 @@ public class StudentsController(AppDbContext context) : ControllerBase
     
         return Ok(student);
     }
+    
+    
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] LoginDto dto) 
+    {
+        var student = context.Student
+            .FirstOrDefault(s => s.Email == dto.Email && s.Password == dto.Password);
+
+        if (student == null)
+        {
+            return Unauthorized(new { message = "Invalid credentials" });
+        }
+
+        return Ok(student);
+    }
+
+    
     
     [HttpPost]
     public IActionResult CreateStudent([FromBody] Student student)

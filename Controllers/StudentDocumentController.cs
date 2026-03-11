@@ -1,97 +1,120 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OptimalVisionAPI.Data;
 using OptimalVisionAPI.Models;
 
 namespace OptimalVisionAPI.Controllers;
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 [Route("api/[controller]")]
 [ApiController]
-public class StudentDocumentController(AppDbContext context) : ControllerBase
-{ 
-    [HttpGet(Name = "GetStudentDocuments")]
-    public IActionResult GetStudentDocuments()
+public class StudentDocumentController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public StudentDocumentController(AppDbContext context)
     {
-        var studentDocuments = context.StudentDocument.ToList();
-        return Ok(studentDocuments);
+        _context = context;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetStudentDocument(int id)
+    // GET: api/studentdocument
+    [HttpGet]
+    public IActionResult GetAllDocuments()
     {
-        var studentDocument = context.StudentDocument.Find(id);
-        if (studentDocument == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(studentDocument);
+        var docs = _context.StudentDocument.ToList();
+        return Ok(docs);
     }
-    
-    
-    
-        
-    [HttpGet("{studentId}", Name = "GetStudentDocumentsByStudentId")]
-    public IActionResult GetStudentDocumentsByStudentId(int studentId)
+
+    // GET: api/studentdocument/document/5
+    [HttpGet("document/{id}")]
+    public IActionResult GetDocumentById(int id)
     {
-        var studentDocuments = context.StudentDocument
+        var doc = _context.StudentDocument.Find(id);
+        if (doc == null)
+            return NotFound(new { message = "Document not found" });
+
+        return Ok(doc);
+    }
+
+    // GET: api/studentdocument/student/5
+    [HttpGet("student/{studentId}")]
+    public IActionResult GetDocumentsByStudentId(int studentId)
+    {
+        var docs = _context.StudentDocument
             .Where(x => x.StudentId == studentId)
             .ToList();
 
-        if (!studentDocuments.Any())
-            return NotFound($"No records found for studentId {studentId}");
+        return Ok(docs);
+    }
 
-        return Ok(studentDocuments);
-    }
-    
-    
-    
-    [HttpPost]
-    public IActionResult CreateStudentDocument([FromBody] StudentDocument studentDocument)
+    // POST: api/studentdocument/upload/5
+    [HttpPost("upload/{studentId}")]
+    public async Task<IActionResult> UploadDocument(int studentId, IFormFile file)
     {
-        context.StudentDocument.Add(studentDocument);
-        context.SaveChanges();
-        return CreatedAtAction(nameof(GetStudentDocument), new { id = studentDocument.Id }, studentDocument);
+        if (file == null || file.Length == 0)
+            return BadRequest(new { message = "No file uploaded" });
+
+        var student = _context.Student.Find(studentId);
+        if (student == null)
+            return NotFound(new { message = "Student not found" });
+
+        var folder = Path.Combine("Uploads", studentId.ToString());
+        Directory.CreateDirectory(folder);
+
+        var filePath = Path.Combine(folder, file.FileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        var doc = new StudentDocument
+        {
+            StudentId = studentId,
+            Title = file.FileName,
+            URL = filePath.Replace("\\", "/"),
+            Size = file.Length.ToString(),
+            DocumentType = Path.GetExtension(file.FileName),
+            DateUploaded = DateTime.UtcNow
+        };
+
+        _context.StudentDocument.Add(doc);
+        _context.SaveChanges();
+
+        return Ok(new { message = "Upload successful", document = doc });
     }
-    
-    
+
+    // PUT: api/studentdocument/5
     [HttpPut("{id}")]
-    public IActionResult UpdateStudentDocument(int id, [FromBody] StudentDocument updatedStudentDocument)
+    public IActionResult UpdateDocument(int id, [FromBody] StudentDocument updated)
     {
-        var studentDocument = context.StudentDocument.Find(id);
-        if (studentDocument == null)
-        {
-            return NotFound();
-        }
-        
-        
-        studentDocument.Title = updatedStudentDocument.Title;
-        studentDocument.URL = updatedStudentDocument.URL;
-        studentDocument.DocumentType = updatedStudentDocument.DocumentType;
-        studentDocument.Size = updatedStudentDocument.Size;
-        studentDocument.DocumentCategoryId = updatedStudentDocument.DocumentCategoryId;
-        studentDocument.StudentId = updatedStudentDocument.StudentId;
-        studentDocument.DateUploaded = updatedStudentDocument.DateUploaded;
-    
-    
-    
-        context.SaveChanges();
-        return NoContent();
+        var doc = _context.StudentDocument.Find(id);
+        if (doc == null)
+            return NotFound(new { message = "Document not found" });
+
+        doc.Title = updated.Title;
+        doc.URL = updated.URL;
+        doc.DocumentType = updated.DocumentType;
+        doc.Size = updated.Size;
+        doc.DocumentCategoryId = updated.DocumentCategoryId;
+        doc.StudentId = updated.StudentId;
+        doc.DateUploaded = updated.DateUploaded;
+
+        _context.SaveChanges();
+
+        return Ok(new { message = "Document updated", document = doc });
     }
-    
-    
+
+    // DELETE: api/studentdocument/5
     [HttpDelete("{id}")]
-    public IActionResult DeleteStudentDocument(int id)
+    public IActionResult DeleteDocument(int id)
     {
-        var studentDocument = context.StudentDocument.Find(id);
-        if (studentDocument == null)
-        {
-            return NotFound();
-        }
-    
-        context.StudentDocument.Remove(studentDocument);
-        context.SaveChanges();
-        return NoContent();
+        var doc = _context.StudentDocument.Find(id);
+        if (doc == null)
+            return NotFound(new { message = "Document not found" });
+
+        _context.StudentDocument.Remove(doc);
+        _context.SaveChanges();
+
+        return Ok(new { message = "Document deleted" });
     }
 }

@@ -22,9 +22,22 @@ public class Student
         get
         {
             var today = DateTime.Today;
-            var age = today.Year - Convert.ToDateTime( DateOfBirth).Year;
-            if (Convert.ToDateTime(DateOfBirth).Date > today.AddYears(-age)) age--;
+            
+            if (string.IsNullOrEmpty(DateOfBirth))
+                return 0;
+
+            var dob = Convert.ToDateTime(DateOfBirth);
+            var age = today.Year - dob.Year; 
+            if (dob.Date > today.AddYears(-age)) age--;
             return age;
+            //
+            //
+            //
+            //
+            // var today = DateTime.Today;
+            // var age = today.Year - Convert.ToDateTime( DateOfBirth).Year;
+            // if (Convert.ToDateTime(DateOfBirth).Date > today.AddYears(-age)) age--;
+            // return age;
         }
     }
 
