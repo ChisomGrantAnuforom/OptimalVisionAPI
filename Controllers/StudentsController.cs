@@ -71,6 +71,34 @@ public class StudentsController(AppDbContext context) : ControllerBase
     }
     
     
+    [HttpPost("onboarding/complete/{id}")]
+    public IActionResult CompleteOnboarding(int id)
+    {
+        var student = context.Student.Find(id);
+        if (student == null)
+        {
+            return NotFound(new { message = "Student not found" });
+        }
+
+        student.OnboardingComplete = true;
+        context.SaveChanges();
+
+        return Ok(student);
+    }
+    
+    
+    [HttpGet("me/{id}")]
+    public IActionResult Me(int id)
+    {
+        var student = context.Student.Find(id);
+        if (student == null)
+        {
+            return NotFound(new { message = "Student not found" });
+        }
+
+        return Ok(student);
+    }
+    
     [HttpPut("{id}")]
     public IActionResult UpdateStudent(int id, [FromBody] Student updatedStudent)
     {

@@ -77,4 +77,6 @@ public class Student
     public string TryYourLuckWithChosenCountryOrNot { get; set; }
 
     public string DateApplied { get; set; }
+    
+    public bool OnboardingComplete { get; set; } = false;
 }

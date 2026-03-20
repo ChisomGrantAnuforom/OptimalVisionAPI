@@ -157,6 +157,9 @@ namespace OptimalVisionAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("OnboardingComplete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -283,8 +286,6 @@ namespace OptimalVisionAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
-
                     b.ToTable("StudentQualifiedCourse");
                 });
 
@@ -304,11 +305,7 @@ namespace OptimalVisionAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentVisaBanCountries");
+                    b.ToTable("StudentVisaBanCountry");
                 });
 
             modelBuilder.Entity("OptimalVisionAPI.Models.StudentVisaRefusalCountry", b =>
@@ -327,63 +324,10 @@ namespace OptimalVisionAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentVisaRefusalCountries");
+                    b.ToTable("StudentVisaRefusalCountry");
                 });
 
             modelBuilder.Entity("OptimalVisionAPI.Models.StudentCountryOfPreference", b =>
-                {
-                    b.HasOne("OptimalVisionAPI.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OptimalVisionAPI.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("OptimalVisionAPI.Models.StudentQualifiedCourse", b =>
-                {
-                    b.HasOne("OptimalVisionAPI.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("OptimalVisionAPI.Models.StudentVisaBanCountry", b =>
-                {
-                    b.HasOne("OptimalVisionAPI.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OptimalVisionAPI.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("OptimalVisionAPI.Models.StudentVisaRefusalCountry", b =>
                 {
                     b.HasOne("OptimalVisionAPI.Models.Country", "Country")
                         .WithMany()
