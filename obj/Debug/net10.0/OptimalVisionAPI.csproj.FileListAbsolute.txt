@@ -157,3 +157,4 @@
 /Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/obj/Debug/net10.0/OptimalVisionAPI.pdb
 /Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/obj/Debug/net10.0/OptimalVisionAPI.genruntimeconfig.cache
 /Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/obj/Debug/net10.0/ref/OptimalVisionAPI.dll
+/Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/bin/Debug/net10.0/OptimalVisionAPI.staticwebassets.runtime.json

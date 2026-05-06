@@ -16,4 +16,13 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="wwwroot\**\*.*" CopyToOutputDirectory="Always" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\Uploads\" />
+    </ItemGroup>
+
+
 </Project>

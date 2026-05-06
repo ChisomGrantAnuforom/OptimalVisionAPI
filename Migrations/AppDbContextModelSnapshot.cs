@@ -111,11 +111,9 @@ namespace OptimalVisionAPI.Migrations
                     b.Property<bool>("AnyAgent")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("AnyBan")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AnyVisaRefusal")
-                        .HasColumnType("bit");
+                    b.Property<string>("AnyVisaRefusalOrBan")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AreFundsAvailableNow")
                         .IsRequired()

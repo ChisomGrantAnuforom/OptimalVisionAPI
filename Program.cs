@@ -3,7 +3,7 @@ using OptimalVisionAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -14,36 +14,35 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-
+// Controllers
 builder.Services.AddControllers();
 
+// EF Core
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<AppDbContext>(); 
-  
-
+// OpenAPI / Swagger
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+// Enable static files (for wwwroot/Uploads)
+app.UseStaticFiles();
 
+// CORS
 app.UseCors("AllowAll");
 
-app.MapControllers();
+// Routing
+app.UseRouting();
 
-
-// Configure the HTTP request pipeline.
+// Only redirect HTTPS in development (your server uses HTTP)
 if (app.Environment.IsDevelopment())
 {
+    app.UseHttpsRedirection();
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
+// Map controllers
+app.MapControllers();
 
 app.Run();

@@ -13,7 +13,7 @@ public class CountriesController (AppDbContext context) : ControllerBase
     [HttpGet(Name = "GetCountries")]
     public IActionResult GetCountries()
     {
-        var countries = context.Student.ToList();
+        var countries = context.Country.ToList();
         return Ok(countries);
     }
 

@@ -62,9 +62,7 @@ public class Student
 
     public bool CanYouStopAgent { get; set; }
 
-    public bool AnyVisaRefusal { get; set; }
-
-    public bool AnyBan { get; set; }
+    public string AnyVisaRefusalOrBan { get; set; }
 
     public bool AvailabilityOfMaintenanceFunds { get; set; }
 

@@ -19,7 +19,8 @@ public class StudentsController(AppDbContext context) : ControllerBase
         return Ok(students);
     }
 
-    [HttpGet("{id}")]
+    // [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public IActionResult GetStudent(int id)
     {
         var student = context.Student.Find(id);
@@ -28,11 +29,12 @@ public class StudentsController(AppDbContext context) : ControllerBase
             return NotFound();
         }
 
-        return Ok(student);
+        return Ok(student); 
     }
 
 
-    [HttpGet("{email}/{password}")]
+    // [HttpGet("{email}/{password}")]
+    [HttpGet("by-credentials/{email}/{password}")]
     public IActionResult GetStudentByEmailAndPassword(string email, string password)
     {
         var student = context.Student.FirstOrDefault(s => s.Email == email && s.Password == password);
@@ -117,7 +119,26 @@ public class StudentsController(AppDbContext context) : ControllerBase
         student.Password = updatedStudent.Password;
         student.Address = updatedStudent.Address;
         student.DateOfBirth = updatedStudent.DateOfBirth;
-    
+        student.PreferredAcademicIntake = updatedStudent.PreferredAcademicIntake;
+        student.MarritalStatus = updatedStudent.MarritalStatus;
+        student.HappyToTravelFirst = updatedStudent.HappyToTravelFirst;
+        student.YearOfLastAcademicStudies = updatedStudent.YearOfLastAcademicStudies;
+        student.QualificationObtained = updatedStudent.QualificationObtained;
+        student.ProgramOfStudy = updatedStudent.ProgramOfStudy;
+        student.Grades = updatedStudent.Grades;
+        student.YearOfCompletion = updatedStudent.YearOfCompletion;
+        student.Sponsor = updatedStudent.Sponsor;
+        student.AvailableDeposit = updatedStudent.AvailableDeposit;
+        student.AnyAgent = updatedStudent.AnyAgent;
+        student.CanYouStopAgent = updatedStudent.CanYouStopAgent;
+        student.AvailabilityOfMaintenanceFunds = updatedStudent.AvailabilityOfMaintenanceFunds;
+        student.ReadyToProceedNow = updatedStudent.ReadyToProceedNow;
+        student.TotalArriveAbroadBudget = updatedStudent.TotalArriveAbroadBudget;
+        student.AreFundsAvailableNow = updatedStudent.AreFundsAvailableNow;
+        student.TryYourLuckWithChosenCountryOrNot = updatedStudent.TryYourLuckWithChosenCountryOrNot;
+        student.DateApplied = updatedStudent.DateApplied;
+        student.OnboardingComplete = updatedStudent.OnboardingComplete;
+        student.AnyVisaRefusalOrBan = updatedStudent.AnyVisaRefusalOrBan;
     
     
         context.SaveChanges();
