@@ -6,6 +6,8 @@ using OptimalVisionAPI.Models;
 
 namespace OptimalVisionAPI.Controllers;
 
+[Route("api/[controller]")]
+[ApiController]
 public class StudentVisaBanCountriesController (AppDbContext context) : ControllerBase
 {
     [HttpGet(Name = "GetStudentVisaBanCountries")]

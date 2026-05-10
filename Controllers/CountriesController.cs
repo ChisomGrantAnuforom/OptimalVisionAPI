@@ -29,4 +29,16 @@ public class CountriesController (AppDbContext context) : ControllerBase
         return Ok(country);
     }
 
+    [HttpGet("by-name/{countryName}")]
+    public IActionResult GetCountryByCountryName(string countryName)
+    {
+        var country = context.Country.FirstOrDefault(c => c.CountryName == countryName);
+        if (country == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(country);
+    }
+
 }

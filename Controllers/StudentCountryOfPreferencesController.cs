@@ -29,7 +29,7 @@ public class StudentCountryOfPreferencesController(AppDbContext context) : Contr
     }
     
     
-    [HttpGet("{studentId}", Name = "GetStudentCountryOfPreferencesByStudentId")]
+    [HttpGet("by-studentid/{studentId}", Name = "GetStudentCountryOfPreferencesByStudentId")]
     public IActionResult GetStudentCountryOfPreferencesByStudentId(int studentId)
     {
         var studentCountryOfPreferences = context.StudentCountryOfPreference
@@ -64,8 +64,8 @@ public class StudentCountryOfPreferencesController(AppDbContext context) : Contr
         
         studentCountryOfPreference.StudentId = updatedStudentCountryOfPreference.StudentId;
         studentCountryOfPreference.CountryId = updatedStudentCountryOfPreference.CountryId;
-        studentCountryOfPreference.Student = updatedStudentCountryOfPreference.Student;
-        studentCountryOfPreference.Country = updatedStudentCountryOfPreference.Country;
+        // studentCountryOfPreference.Student = updatedStudentCountryOfPreference.Student;
+        // studentCountryOfPreference.Country = updatedStudentCountryOfPreference.Country;
         
         context.SaveChanges();
         return NoContent();

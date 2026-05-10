@@ -222,10 +222,6 @@ namespace OptimalVisionAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("StudentId");
-
                     b.ToTable("StudentCountryOfPreference");
                 });
 
@@ -323,25 +319,6 @@ namespace OptimalVisionAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("StudentVisaRefusalCountry");
-                });
-
-            modelBuilder.Entity("OptimalVisionAPI.Models.StudentCountryOfPreference", b =>
-                {
-                    b.HasOne("OptimalVisionAPI.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OptimalVisionAPI.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Student");
                 });
 #pragma warning restore 612, 618
         }
