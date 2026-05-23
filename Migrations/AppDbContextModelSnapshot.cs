@@ -108,8 +108,9 @@ namespace OptimalVisionAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("AnyAgent")
-                        .HasColumnType("bit");
+                    b.Property<string>("AnyAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AnyVisaRefusalOrBan")
                         .IsRequired()
@@ -119,14 +120,16 @@ namespace OptimalVisionAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("AvailabilityOfMaintenanceFunds")
-                        .HasColumnType("bit");
+                    b.Property<string>("AvailabilityOfMaintenanceFunds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("AvailableDeposit")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool>("CanYouStopAgent")
-                        .HasColumnType("bit");
+                    b.Property<string>("CanYouStopAgent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DateApplied")
                         .IsRequired()
@@ -178,8 +181,9 @@ namespace OptimalVisionAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("ReadyToProceedNow")
-                        .HasColumnType("bit");
+                    b.Property<string>("ReadyToProceedNow")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Sponsor")
                         .HasColumnType("int");

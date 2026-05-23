@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OptimalVisionAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4312fc04cff5ea59ac4b754b3be0182b9ef96c4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d0ac762938fa7749cfaa872eede365e8a4bba3b")]
 [assembly: System.Reflection.AssemblyProductAttribute("OptimalVisionAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OptimalVisionAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
