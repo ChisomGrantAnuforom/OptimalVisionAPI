@@ -85,4 +85,24 @@ public class StudentCountryOfPreferencesController(AppDbContext context) : Contr
         context.SaveChanges();
         return NoContent();
     }
+    
+
+    
+    [HttpDelete("{countryId:int}/{studentId:int}")]
+    public IActionResult DeleteStudentCountryOfPreferenceByCountryIdAndStudentId(int countryId, int studentId)
+    {
+        var record = context.StudentCountryOfPreference
+            .FirstOrDefault(x => x.CountryId == countryId && x.StudentId == studentId);
+
+        if (record == null)
+            return NotFound();
+
+        context.StudentCountryOfPreference.Remove(record);
+        context.SaveChanges();
+
+        return NoContent();
+    }
+
+    
+    
 }
