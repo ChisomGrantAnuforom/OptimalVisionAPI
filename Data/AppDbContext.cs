@@ -17,4 +17,7 @@ public class AppDbContext : DbContext
     public DbSet<StudentVisaBanCountry> StudentVisaBanCountry { get; set; }
     public DbSet<StudentVisaRefusalCountry>  StudentVisaRefusalCountry { get; set; }
     
+    public DbSet<Article> Articles { get; set; }
+
+    
 }

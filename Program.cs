@@ -1,5 +1,7 @@
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using OptimalVisionAPI.Data;
+using OptimalVisionAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,46 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // OpenAPI / Swagger
 builder.Services.AddOpenApi();
 
+builder.Services.AddTransient<ArticleJob>();
+
+
+builder.Services.AddHttpClient<ArticleGeneratorService>(client =>
+{
+    client.BaseAddress = new Uri("https://api.groq.com/openai/v1/");
+    client.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
+});
+
+
+
+//using hangfire for daily cron job for auto edu article generator
+builder.Services.AddHangfire(config =>
+{
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddHangfireServer();
+
+
+
+
+
 var app = builder.Build();
+
+app.UseHangfireDashboard("/jobs");//ai article generation job
+// app.UseHangfireDashboard("/hangfire");
+
+// RecurringJob.AddOrUpdate<ArticleJob>(
+//     "morning-article-job",
+//     job => job.GenerateDailyArticle(),
+//     Cron.Daily(8)
+// );
+
+RecurringJob.AddOrUpdate<ArticleJob>(
+    "onetime-article-job",
+    job => job.GenerateDailyArticle(),
+    "41 19 * * *"
+);
+
 
 // Enable static files (for wwwroot/Uploads)
 app.UseStaticFiles();

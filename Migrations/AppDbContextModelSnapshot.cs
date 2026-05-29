@@ -58,6 +58,34 @@ namespace OptimalVisionAPI.Migrations
                     b.ToTable("Admin");
                 });
 
+            modelBuilder.Entity("OptimalVisionAPI.Models.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Articles");
+                });
+
             modelBuilder.Entity("OptimalVisionAPI.Models.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -151,8 +179,9 @@ namespace OptimalVisionAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("HappyToTravelFirst")
-                        .HasColumnType("bit");
+                    b.Property<string>("HappyToTravelFirst")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MarritalStatus")
                         .IsRequired()
@@ -185,8 +214,9 @@ namespace OptimalVisionAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Sponsor")
-                        .HasColumnType("int");
+                    b.Property<string>("Sponsor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
