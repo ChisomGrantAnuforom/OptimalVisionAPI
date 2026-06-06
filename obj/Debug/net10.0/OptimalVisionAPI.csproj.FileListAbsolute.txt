@@ -176,3 +176,4 @@
 /Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/bin/Debug/net10.0/tr-TR/Hangfire.Core.resources.dll
 /Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/bin/Debug/net10.0/zh-TW/Hangfire.Core.resources.dll
 /Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/bin/Debug/net10.0/zh/Hangfire.Core.resources.dll
+/Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/bin/Debug/net10.0/BCrypt-Net-Next.dll

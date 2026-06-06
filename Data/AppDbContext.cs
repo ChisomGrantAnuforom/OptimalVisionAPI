@@ -18,6 +18,8 @@ public class AppDbContext : DbContext
     public DbSet<StudentVisaRefusalCountry>  StudentVisaRefusalCountry { get; set; }
     
     public DbSet<Article> Articles { get; set; }
+    
+    public DbSet<PasswordResetOtp> PasswordResetOtps { get; set; }
 
     
 }

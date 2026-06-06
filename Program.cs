@@ -28,6 +28,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddTransient<ArticleJob>();
 
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+
 
 builder.Services.AddHttpClient<ArticleGeneratorService>(client =>
 {

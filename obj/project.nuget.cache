@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2L0YePhXllM=",
+  "dgSpecHash": "9Ea8mCtSv2M=",
   "success": true,
   "projectFilePath": "/Users/macbookpro/DotNetProjects/OptimalVisionAPI/OptimalVisionAPI/OptimalVisionAPI.csproj",
   "expectedPackageFiles": [
     "/Users/macbookpro/.nuget/packages/azure.core/1.47.1/azure.core.1.47.1.nupkg.sha512",
     "/Users/macbookpro/.nuget/packages/azure.identity/1.14.2/azure.identity.1.14.2.nupkg.sha512",
+    "/Users/macbookpro/.nuget/packages/bcrypt.net-next/4.2.0/bcrypt.net-next.4.2.0.nupkg.sha512",
     "/Users/macbookpro/.nuget/packages/hangfire/1.8.23/hangfire.1.8.23.nupkg.sha512",
     "/Users/macbookpro/.nuget/packages/hangfire.aspnetcore/1.8.23/hangfire.aspnetcore.1.8.23.nupkg.sha512",
     "/Users/macbookpro/.nuget/packages/hangfire.core/1.8.23/hangfire.core.1.8.23.nupkg.sha512",
